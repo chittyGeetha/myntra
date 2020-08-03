@@ -2,6 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const ProfileSchema = new Schema(
   {
+    photo:{
+      type:[""],
+    },    
     firstname: {
       type: String,
       required: true,

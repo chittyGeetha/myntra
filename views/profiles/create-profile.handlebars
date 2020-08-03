@@ -1,12 +1,15 @@
-<form action="/profile/create-profile" method="post">
+<form action="/profile/create-profile" method="post" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-md-4 my-2">
+        <div class="col-md-3 my-2">
+            <input type="file" class="form-control" name="photo" placeholder="upload image">
+        </div>
+        <div class="col-md-3 my-2">
             <input type="text" class="form-control" name="firstname" placeholder="firstname" required>
         </div>
-        <div class="col-md-4 my-2">
+        <div class="col-md-3 my-2">
             <input type="text" class="form-control" name="lastname" placeholder="lastname" required />
         </div>
-        <div class="col-md-4 my-2">
+        <div class="col-md-3 my-2">
             <input type="text" class="form-control" name="phone" placeholder="phone number" required>
         </div>
         <div class="col-md-6 my-2">

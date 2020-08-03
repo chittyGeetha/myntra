@@ -1,9 +1,13 @@
 //ROUTER LEVEL MIDDLEWARE
 const express = require("express");
 const router = express.Router();
+const multer=require("multer");
 
 //load Profile Schema Model;
 const Profile = require("../../Model/Profile");
+//load multer file
+const uploadPhoto=require('../../config/multer');
+var upload=multer({storage:uploadPhoto.storage});
 
 //@ http method GET
 //@description its profile get information
@@ -15,12 +19,20 @@ router.get("/", (req, res) => {
 router.get("/create-profile", (req, res) => {
   res.render("./profiles/create-profile");
 });
+router.get("/all-profiles", (req, res) => {
+  //find profile collections from database
+  Profile.find({}).sort({data:'desc'}).lean().then((profile)=>{
+    res.render("./profiles/all-profiles",{profile});
+    
+  }).catch((err)=>console.log(err));
+  
+});
 
 // @http method POST
 // @description CREATE PROFILE DATA
 // @access PRIVATE
 
-router.post("/create-profile", (req, res) => {
+router.post("/create-profile", upload.single("photo"),(req, res) => {
   let {
     firstname,
     lastname,
@@ -33,6 +45,7 @@ router.post("/create-profile", (req, res) => {
     landmark,
   } = req.body;
   let newProfile = {
+    photo:req.file,
     firstname,
     lastname,
     phone,
@@ -47,7 +60,7 @@ router.post("/create-profile", (req, res) => {
   new Profile(newProfile)
     .save()
     .then((profile) => {
-      res.redirect("/profile", 201, { profile });
+      res.redirect("/profile/all-profiles", 201, { profile });
     })
     .catch((err) => console.log(err));
 });
