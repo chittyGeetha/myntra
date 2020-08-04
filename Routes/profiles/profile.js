@@ -27,6 +27,16 @@ router.get("/all-profiles", (req, res) => {
   }).catch((err)=>console.log(err));
   
 });
+/*========================GET USER PROFILE DETAILS ========================*/
+router.get("/user-details/:id", (req, res) => {
+  Profile.findOne({ _id: req.params.id })
+    .lean()
+    .then((profile_detail) => {
+      res.render("./profiles/user-profile", { profile_detail });
+    })
+    .catch((err) => console.log(err));
+});
+
 
 // @http method POST
 // @description CREATE PROFILE DATA
@@ -36,7 +46,9 @@ router.post("/create-profile", upload.single("photo"),(req, res) => {
   let {
     firstname,
     lastname,
+    designation,
     phone,
+    skills,
     address,
     alt_address,
     gender,
@@ -49,6 +61,8 @@ router.post("/create-profile", upload.single("photo"),(req, res) => {
     firstname,
     lastname,
     phone,
+    designation,
+    skills,
     address,
     alt_address,
     gender,

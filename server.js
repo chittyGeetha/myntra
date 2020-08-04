@@ -1,46 +1,52 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
-const Handlebars=require("handlebars");
+const Handlebars = require("handlebars");
+
 const { connect } = require("mongoose");
 const { PORT, MONGODB_URL } = require("./config");
+
 const app = express();
 
-/*=================connect mongodnb database ========================*/
+/*---database connecting----*/
+
 connect(
   MONGODB_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     if (err) throw err;
-    console.log("Myntra database connection successfully connected");
+    console.log("succesfully connected to database");
   }
 );
 
-/*==========================Template engine middleware starts here====================*/
+/*----------Template Engine Middleware start-------*/
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
-/*==========================Template engine middleware ends here====================*/
-Handlebars.registerHelper("removeFirst6Char", (str)=>{
-  let TrimValue=[...str].splice(6).join("");
+
+/*----------Template Engine Middleware ends-------*/
+
+//handlebar HelperClasses
+Handlebars.registerHelper("removeFirst6Char", (str) => {
+  let TrimValue = [...str].splice(6).join("");
   return new Handlebars.SafeString(TrimValue);
 });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*========================server static assets======================================*/
+/*---------static files----------*/
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/node_modules"));
 
-app.get('/', (req, res) => {
-  res.render('./home')
-})
+app.get("/", (req, res) => {
+  res.render("./home");
+});
 
-/*===========================load ROUTES MODULE====================================*/
+/*------load router files------*/
 app.use("/profile/", require("./Routes/profiles/profile"));
-app.use("/auth/", require("./Routes/auth/auth"));
-app.use("/sports", require("./Routes/products/sports"));
+app.use("/profile/", require("./Routes/auth/auth"));
 
 app.listen(PORT, (err) => {
   if (err) throw err;
-  console.log("Myntra server is running on port number " + PORT);
+  console.log("myntra server is running on port number " + PORT);
 });

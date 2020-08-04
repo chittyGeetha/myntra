@@ -1,8 +1,9 @@
-<form action="/profile/create-profile" method="post" enctype="multipart/form-data">
-    <div class="row">
+x<form action="/profile/create-profile" method="post" enctype="multipart/form-data">
+    <div class="row" style="margin-top: 30px;">
         <div class="col-md-3 my-2">
-            <input type="file" class="form-control" name="photo" placeholder="upload image">
+            <input type="file" class="form-control" name="photo" placeholder="upload a photo">
         </div>
+
         <div class="col-md-3 my-2">
             <input type="text" class="form-control" name="firstname" placeholder="firstname" required>
         </div>
@@ -10,8 +11,21 @@
             <input type="text" class="form-control" name="lastname" placeholder="lastname" required />
         </div>
         <div class="col-md-3 my-2">
+            <input type="text" class="form-control" name="designation" placeholder="user designation" required>
+        </div>
+        <div class="col-md-6 my-2">
             <input type="text" class="form-control" name="phone" placeholder="phone number" required>
         </div>
+        <div class="col-md-6 my-2">
+            <input type="checkbox" class="form-control-checkbox" name="skills" value="Web Developer"> Web Developer
+            <input type="checkbox" class="form-control-checkbox" name="skills" value="React Developer"> React Developer
+            <input type="checkbox" class="form-control-checkbox" name="skills" value="Angular Developer"> Angular
+            Developer
+            <input type="checkbox" class="form-control-checkbox" name="skills" value="Java Developer"> Java Developer
+            <input type="checkbox" class="form-control-checkbox" name="skills" value="Fullstack Developer"> Fullstack
+            Developer
+        </div>
+
         <div class="col-md-6 my-2">
             <textarea name="address" cols="10" rows="10" class="form-control" placeholder="address" required></textarea>
         </div>
