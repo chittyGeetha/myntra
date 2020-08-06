@@ -1,38 +1,49 @@
-<form action="/profile/edit-profile/{{edit_profile._id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+<form action="/profile/edit-profile/{{edit_Profile._id}}?_method=PUT" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
     <div class="row" style="margin-top: 30px;">
         <div class="col-md-3 my-2">
-            <input type="file" class="form-control" name="photo" placeholder="upload a photo">
+            <input type="file" class="form-control" name="photo" placeholder="firstname">
         </div>
 
         <div class="col-md-3 my-2">
-            <input type="text" class="form-control" value="{{edit_profle.firstname}}" name="firstname" placeholder="firstname" required>
+            <input type="text" class="form-control" value="{{edit_Profile.firstname}}" name="firstname"
+                placeholder="firstname" required>
         </div>
         <div class="col-md-3 my-2">
-            <input type="text" class="form-control" value="{{edit_profle.lastname}}" name="lastname" placeholder="lastname" required />
+            <input type="text" class="form-control" value="{{edit_Profile.lastname}}" name="lastname"
+                placeholder="lastname" required />
         </div>
         <div class="col-md-3 my-2">
-            <input type="text" class="form-control" value="{{edit_profle.designation}}" name="designation" placeholder="user designation" required>
+            <input type="text" class="form-control" value="{{edit_Profile.designation}}" name="designation"
+                placeholder="user designation" required>
         </div>
         <div class="col-md-6 my-2">
-            <input type="text" class="form-control" value="{{edit_profle.phone}}" name="phone" placeholder="phone number" required>
+            <input type="text" class="form-control" value="{{edit_Profile.phone}}" name="phone"
+                placeholder="phone number" required>
         </div>
         <div class="col-md-6 my-2">
-            <input type="checkbox"       
-            class="form-control-checkbox" name="skills" value="Web Developer" {{#if edit_profile.skills.[0]}} checked{{/if}}> Web Developer
-            <input type="checkbox" class="form-control-checkbox" name="skills" value="React Developer" {{#if edit_profile.skills.[1]}} checked{{/if}}> React Developer
-            <input type="checkbox" class="form-control-checkbox" name="skills" value="Angular Developer" {{#if edit_profile.skills.[2]}} checked{{/if}}> Angular
+            <input type="checkbox" class="form-control-checkbox" {{#if edit_Profile.skills.[0]}}checked{{/if}}
+                name="skills" value="Web Developer"> Web Developer
+            <input type="checkbox" class="form-control-checkbox" {{#if edit_Profile.skills.[1]}}checked{{/if}}
+                name="skills" value="React Developer"> React Developer
+            <input type="checkbox" class="form-control-checkbox" {{#if edit_Profile.skills.[2]}}checked{{/if}}
+                name="skills" value="Angular Developer"> Angular
             Developer
-            <input type="checkbox" class="form-control-checkbox" name="skills" value="Java Developer" {{#if edit_profile.skills.[3]}} checked{{/if}}> Java Developer
-            <input type="checkbox" class="form-control-checkbox" name="skills" value="Fullstack Developer" {{#if edit_profile.skills.[4]}} checked{{/if}}> Fullstack
+            <input type="checkbox" class="form-control-checkbox" {{#if edit_Profile.skills.[3]}}checked{{/if}}
+                name="skills" value="Java Developer"> Java Developer
+            <input type="checkbox" class="form-control-checkbox" {{#if edit_Profile.skills.[4]}}checked{{/if}}
+                name="skills" value="Fullstack Developer"> Fullstack
             Developer
         </div>
 
         <div class="col-md-6 my-2">
-            <textarea name="address" cols="10" rows="10"  class="form-control" value="{{edit_profile.address}}" placeholder="address" required></textarea>
+            <textarea name="address" cols="10" rows="10" class="form-control" placeholder="address" required>
+                {{edit_Profile.address}}
+            </textarea>
         </div>
         <div class="col-md-6 my-2">
-            <textarea name="alt_address" cols="10" rows="10" class="form-control" value="{{edit_profile.alt_address}}"
-                placeholder="alternate address"></textarea>
+            <textarea name="alt_address" cols="10" rows="10" class="form-control"
+                placeholder="alternate address">{{edit_Profile.alt_address}}</textarea>
 
         </div>
 
@@ -292,12 +303,14 @@
             </select>
         </div>
         <div class="col-md-4 my-2">
-            <input type="text" class="form-control" value="{{edit_profile.pincode}}" name="pincode" placeholder="pincode"  required>
+            <input type="text" class="form-control" value="{{edit_Profile.pincode}}" name="pincode" placeholder="pincode"
+                required>
         </div>
         <div class="col-md-4 my-2">
-            <input type="text" class="form-control" value="{{edit_profile.landmark}}" name="landmark" placeholder="landmark" required>
+            <input type="text" class="form-control" value="{{edit_Profile.landmark}}" name="landmark"
+                placeholder="landmark" required>
         </div>
-        <button class="btn btn-success my-2">Add profile</button>
+        <button class="btn btn-success my-2">Edit profile</button>
 
     </div>
 

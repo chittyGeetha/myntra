@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const Handlebars = require("handlebars");
+const methodOverride = require("method-override");
 
 const { connect } = require("mongoose");
 const { PORT, MONGODB_URL } = require("./config");
@@ -15,7 +16,7 @@ connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     if (err) throw err;
-    console.log("succesfully connected to database");
+    console.log("successfully connected to database");
   }
 );
 
@@ -33,6 +34,11 @@ Handlebars.registerHelper("removeFirst6Char", (str) => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+/*========================METHOD OVERRIDE MIDDLEWARE =======================*/
+
+// override with POST having ?_method=PUT or DELETE
+app.use(methodOverride("_method"));
 
 /*---------static files----------*/
 app.use(express.static(__dirname + "/public"));

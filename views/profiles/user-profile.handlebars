@@ -1,16 +1,25 @@
 <div class="container emp-profile">
-    <form method="post">
+    <section>
         <div class="row">
             <div class="col-md-4">
+
                 <div class="profile-img">
-                    <img src="{{ removeFirst6Char  profile_detail.photo.0.path}}" alt="profile_pic" />
+                    {{!-- <img src="{{ removeFirst6Char  profile_detail.photo.0.path}}" alt="profile_pic" /> --}}
+
+                    {{#if profile_detail.photo}}
+                    <td><img src="{{removeFirst6Char profile_detail.photo.0.path}}" /></td>
+                    {{else}}
+                    <td><img src="../../images/download.jfif" alt="default" /></td>
+                    {{/if}}
                     <div class="file btn btn-lg btn-primary">
                         Change Photo
                         <input type="file" name="file" />
                     </div>
                 </div>
+                <hr />
+
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="profile-head">
                     <h5>
                         {{profile_detail.firstname}} {{profile_detail.lastname}}
@@ -31,9 +40,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <a class="btn btn-secondary" href="/profile/edit-profile/{{profile_detail._id}}">Edit Profile</a>
-                <div>{{profile_detail._id}}</div> 
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <a class="btn btn-secondary" href="/profile/edit-profile/{{profile_detail._id}}">Edit Profile</a>
+                    <form action="/profile/profile-delete/{{profile_detail._id}}?_method=DELETE" method="post">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+
+                </div>
             </div>
         </div>
         <div class="row">
@@ -175,5 +190,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    </section>
 </div>
