@@ -148,3 +148,10 @@
 	font-weight: 600;
 	color: #0062cc;
   }
+  .alert {
+	position: absolute;
+	right: 0;
+	top: 8%;
+	transform: translate(500px);
+	transition: ease all all .7s;
+  }

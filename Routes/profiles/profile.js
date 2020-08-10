@@ -44,7 +44,7 @@ router.get("/user-details/:id", (req, res) => {
 router.get("/edit-profile/:id", (req, res) => {
   Profile.findOne({ _id: req.params.id })
     .lean()
-    .then((editProfile) => {
+    .then((edit_Profile) => {
       res.render("./profiles/edit-profile", { edit_Profile });
     })
     .catch((err) => console.log(err));
@@ -88,6 +88,7 @@ router.post("/create-profile", upload.single("photo"), (req, res) => {
   new Profile(newProfile)
     .save()
     .then((profile) => {
+       req.flash("success_msg", "successfully profile created");
       res.redirect("/profile/all-profiles", 201, { profile });
     })
     .catch((err) => console.log(err));
@@ -116,6 +117,7 @@ router.put("/edit-profile/:id", upload.single("photo"), (req, res) => {
       updateProfile
         .save()
         .then((update) => {
+          req.flash("success_msg", "successfully profile Updated");
           res.redirect("/profile/all-profiles", 201, { update });
         })
         .catch((err) => console.log(err));
@@ -127,6 +129,7 @@ router.put("/edit-profile/:id", upload.single("photo"), (req, res) => {
 router.delete("/profile-delete/:id", (req, res) => {
   Profile.deleteOne({ _id: req.params.id })
     .then(() => {
+      req.flash("success_msg", "successfully profile deleted");
       res.redirect("/profile/all-profiles", 201);
     })
     .catch((err) => console.log(err));
